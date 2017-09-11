@@ -1,16 +1,21 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Engine\Service;
 
-/**
- * Description of AbstractProvider
- *
- * @author Smoke
- */
-class AbstractProvider {
-    //put your code here
+abstract class AbstractProvider {
+    
+    /**
+     *
+     * @var type \Engine\DI\DI
+     */
+    protected $di;
+    
+    public function __construct(Engine\DI\DI $di) {
+        
+        $this->di = $di;
+        
+    }
+    
+    abstract function init();
+    
 }

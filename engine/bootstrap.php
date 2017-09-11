@@ -16,5 +16,7 @@ try {
     $cms->run();
 } 
 catch (Exception $e) {
+    
     echo $e->getMessage();
+    
 }

@@ -16,9 +16,11 @@ class DI {
      * @return \Engine\DI\DI
      */
     public function set($key, $value) {
+        
         $this->container[$key] = $value;
         
         return $this;
+        
     }
     
     /**
@@ -27,7 +29,9 @@ class DI {
      * @return type mixed
      */
     public function get($key) {
+        
         return $this->has($key);
+        
     }
     
     /**
@@ -36,6 +40,8 @@ class DI {
      * @return type bool
      */
     public function has($key) {
+        
         return isset($this->container[$key]) ? $this->container[$key] : NULL;
+        
     }
 }

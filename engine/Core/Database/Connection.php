@@ -1,16 +1,48 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Engine\Core\Database;
 
-/**
- * Description of Connection
- *
- * @author Smoke
- */
 class Connection {
-    //put your code here
+    
+    private $link;
+    
+    public function __construct() {
+        
+        $this->connect();
+        
+    }
+    
+    private function connect() {
+        
+        $config = require_once 'config.php';
+        
+        $dsn = 'mysql:host='.$config['host'].';dbname='.$config['db_name'].
+                ';charset='.$config['charset'];
+        
+        $this->link = new PDO($dsn, $config['username'], $config['passwd']);
+        
+        return $this;
+        
+    }
+    
+    public function execute($sql) {
+        $sth = $this->link->prepare($sql);
+        
+        return $sth->execute();
+    }
+    
+    public function query($sql) {
+        $sth = $this->link->prepare($sql);
+        
+        $sth->execute();
+        
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        
+        if($result === FALSE) {
+            return [];
+        }
+        
+        return $result;
+    }
+    
 }
